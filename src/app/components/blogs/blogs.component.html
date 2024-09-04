@@ -1,0 +1,57 @@
+<!-- Button to open modal -->
+<button class="btn btn-primary" >Create Blog</button>
+
+<!-- Modal Template -->
+
+  <div class="modal-header">
+    <h4 class="modal-title">Create Blog</h4>
+
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="insertData()" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" class="form-control" name="title" [(ngModel)]="blog.title">
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" id="description" class="form-control" name="description" [(ngModel)]="blog.description">
+      </div>
+
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select id="status" class="form-select" name="status" [(ngModel)]="blog.status">
+          <option value="" disabled selected>Select status</option>
+          <option value="active">Active</option>
+          <option value="deactive">Deactive</option>
+        </select>
+      </div>
+
+      <!-- <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileChange($event)" name="image">
+      </div> -->
+
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+
+
+<!-- Blog Cards -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let blog of blogs">
+      <div class="card m-2" style="width: 18rem;">
+        <!-- Display image from blog data -->
+        <img [src]="getImageUrl(blog.image)" class="card-img-top" alt="{{blog.title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{blog.title}}</h5>
+          <p class="card-text">{{ truncateDescription(blog.description) }}</p>
+          <a href="#" class="btn btn-primary">Edit</a>
+          <!-- No delete button -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
